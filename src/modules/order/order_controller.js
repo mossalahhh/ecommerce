@@ -85,8 +85,7 @@ export const createOrder = async (req, res, next) => {
 
   console.log("1- Order created:", order._id);
 
-  console.log("2- Invoice Path:", pdfPath);
-  console.log("Directory exists?", __direname);
+  // console.log("Directory exists?", __direname);
 
   console.log("3- Before createInvoice");
 
@@ -111,6 +110,7 @@ export const createOrder = async (req, res, next) => {
   //   `../../../invoice_temp/${order._id}.pdf`
   // );
   const pdfPath = `/tmp/${order._id}.pdf`;
+  console.log("2- Invoice Path:", pdfPath);
 
   createInvoice(invoice, pdfPath);
   console.log("5- Before Cloudinary upload");
