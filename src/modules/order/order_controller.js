@@ -98,7 +98,7 @@ export const createOrder = async (req, res, next) => {
 
   const pdfPath = path.join(
     __direname,
-    `../../../invoice_temp/${invoice._id}.pdf`
+    `../../../invoice_temp/${order._id}.pdf`
   );
 
   createInvoice(invoice, pdfPath);
