@@ -32,71 +32,27 @@ A production-ready Node.js backend for an e-commerce platform built using **Expr
 
 ---
 
-## 📁 Folder Structure (updated)
+## 📁 Folder Structure
 
+```
 src/
-├── Db/
-│ ├── models/
-│ │ ├── user_model.js
-│ │ ├── product_model.js
-│ │ ├── brand_model.js
-│ │ ├── category_model.js
-│ │ ├── subCategory_model.js
-│ │ ├── cart_model.js
-│ │ ├── order_model.js
-│ │ └── coupon_model.js
-│ └── connection.js
-├── modules/
-│ ├── auth/
-│ │ ├── auth_controller.js
-│ │ ├── auth_validation.js
-│ │ └── auth_router.js
-│ ├── product/
-│ │ ├── product_controller.js
-│ │ ├── product_validation.js
-│ │ └── product_router.js
-│ ├── brand/
-│ │ ├── brand_controller.js
-│ │ └── brand_router.js
-│ ├── category/
-│ │ ├── category_controller.js
-│ │ └── category_router.js
-│ ├── subCategory/
-│ │ ├── subCategory_controller.js
-│ │ └── subCategory_router.js
-│ ├── cart/
-│ │ ├── cart_controller.js
-│ │ └── cart_router.js
-│ ├── coupon/
-│ │ ├── coupon_controller.js
-│ │ └── coupon_router.js
-│ └── order/
-│ ├── order_controller.js
-│ ├── order_service.js
-│ └── order_router.js
-├── utils/
-│ ├── cloudinary.js
-│ ├── sendEmail.js
-│ ├── generate_invoice.js
-│ ├── multer.js
-│ ├── catchError.js
-│ ├── html_templates/
-│ │ └── invoice_template.html
-│ └── validation_helpers.js
-├── middlewares/
-│ ├── authentication.js
-│ ├── authorization.js
-│ └── validation_middleware.js
-└── server.js
-
-yaml
-Copy code
-
-> ملاحظات:
-> * `modules/*` يحتوي على الـ controllers، validations، وrouters لكل نطاق.
-> * `utils/multer.js` مسؤول عن إعداد multer (multer storage, field limits, validation).
-> * `utils/generate_invoice.js` يستخدم `pdfkit` لإنشاء ملف PDF مؤقت في `/tmp` (Vercel-compatible).
-> * `utils/catchError.js` middleware بسيط لالتقاط الأخطاء وإرسال JSON error responses.
+ ├── Db/
+ │    ├── models/
+ │    └── connection.js
+ ├── modules/
+ │    ├── order/
+ │    │     ├── order_controller.js
+ │    │     └── order_service.js
+ │    ├── cart/
+ │    ├── product/
+ │    ├── coupon/
+ │    └── auth/
+ ├── utils/
+ │    ├── sendEmail.js
+ │    ├── generate_invoice.js
+ │    └── cloudinary.js
+ └── server.js
+```
 
 ---
 
@@ -104,6 +60,7 @@ Copy code
 
 Create a `.env` file:
 
+```
 MONGO_URI=
 STRIPE_KEY=
 SUCCESS_URL=
@@ -115,166 +72,153 @@ FOLDER_NAME=ecommerce
 JWT_SECRET=
 EMAIL_USER=
 EMAIL_PASS=
-
-pgsql
-Copy code
+```
 
 ---
 
-## 📦 Dependencies
+# 📘 API Documentation
 
-The project uses these packages (add to `package.json`):
+## 🛒 Cart APIs
+
+### **Add To Cart**
+
+```
+POST /cart/add
+```
+
+**Body:**
 
 ```json
 {
-  "dependencies": {
-    "bcryptjs": "^3.0.2",
-    "cloudinary": "^2.7.0",
-    "crypto": "^1.0.1",
-    "dotenv": "^17.2.1",
-    "express": "^5.1.0",
-    "joi": "^18.0.1",
-    "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.18.0",
-    "morgan": "^1.10.1",
-    "multer": "^2.0.2",
-    "nanoid": "^5.1.6",
-    "nodemailer": "^7.0.6",
-    "pdfkit": "^0.17.2",
-    "randomstring": "^1.3.1",
-    "slugify": "^1.6.6",
-    "stripe": "^19.3.1",
-    "voucher-code-generator": "^1.3.0"
-  }
+  "productId": "...",
+  "quantity": 2
 }
-📘 API Documentation (summary)
-Note: routes below are examples; your actual routes use the routers/middlewares described in the codebase.
+```
 
-Authentication (Auth)
-POST /auth/register — register (validation + send activation code)
+### **Get Cart**
 
-GET /auth/confirmation/:activationCode — confirm email
+```
+GET /cart
+```
 
-POST /auth/logIn — login (returns JWT)
+### **Remove From Cart**
 
-PATCH /auth/forgetCode — request reset code
+```
+DELETE /cart/remove/:productId
+```
 
-PATCH /auth/resetPassword — reset password
+---
 
-Brand
-POST /brand/ — create brand (admin, multer single brand)
+## 🎟 Coupon APIs
 
-PATCH /brand/:brandId — update brand (admin, upload)
+### **Apply Coupon**
 
-DELETE /brand/:brandId — delete brand
+```
+POST /coupon/apply
+```
 
-GET /brand/ — list brands
+```json
+{
+  "name": "SUMMER20"
+}
+```
 
-Category
-POST /category/ — create category (admin, multer single category)
+---
 
-PATCH /category/:categoryId — update category
+## 📦 Order APIs
 
-DELETE /category/:categoryId — delete category
+### **Create Order**
 
-GET /category/ — list categories
+```
+POST /order
+```
 
-SubCategory (merged params)
-POST /category/:categoryId/subcategory/ — create subcategory (admin)
+**Body:**
 
-PATCH /category/:categoryId/subcategory/:subCategoryId — update
+```json
+{
+  "payment": "Visa || Cash",
+  "address": "Cairo, Egypt",
+  "phone": "0100000000",
+  "coupon": "SUMMER20"
+}
+```
 
-DELETE /category/:categoryId/subcategory/:subCategoryId — delete
+### **Cancel Order**
 
-GET /category/:categoryId/subcategory/ — list
+```
+PATCH /order/cancel/:invoiceId
+```
 
-Product (merged params)
-POST /category/:categoryId/product/ — create product (admin, fields: defaultImage, subImages)
+---
 
-PATCH /category/:categoryId/product/:productId — update product
+## 💳 Stripe Payment Example
 
-DELETE /category/:categoryId/product/:productId — delete product
+Checkout session gets created when payment type = **Visa**.
 
-Cart
-POST /cart/ — add to cart
+![Stripe Checkout](path_to_stripe_image)
 
-GET /cart/ — get user cart
+---
 
-PATCH /cart/ — update quantities
+## 🧾 Invoice Example
 
-PATCH /cart/clear — clear cart
+Generated PDF is stored temporarily in:
 
-PATCH /cart/:productId — remove single product
+```
+/tmp/orderId.pdf
+```
 
-Coupon
-POST /coupon/ — create coupon (admin)
+And uploaded to Cloudinary.
 
-PATCH /coupon/:code — update coupon
+![Invoice Example](path_to_invoice_image)
 
-DELETE /coupon/:code — delete coupon
+---
 
-GET /coupon/ — list coupons
+## 📬 Email Notification
 
-Order
-POST /order/ — create order (validation, invoice generation, cloudinary upload, email, stripe checkout session for Visa)
+The system sends the invoice PDF to the user's email:
 
-PATCH /order/:invoiceId — cancel order
+```
+sendEmail({ to, subject, attachments: [...] })
+```
 
-💳 Stripe Payment Example
-Checkout session gets created when payment === "Visa" in order flow. The checkout redirect URL returned from Stripe is sent under results: session.url.
+---
 
+## 🏗 Deployment (Vercel)
 
-(Local path above — your deployment pipeline should serve/transform the file path into an accessible URL.)
+A `vercel.json` file is required:
 
-🧾 Invoice Example
-Generated PDF is stored temporarily on serverless environment at:
-
-bash
-Copy code
-/tmp/{orderId}.pdf
-It then gets uploaded to Cloudinary and attached to the order record.
-
-
-📬 Email Notification
-The system sends the invoice PDF to the user's email via utils/sendEmail.js:
-
-js
-Copy code
-sendEmail({
-  to: user.email,
-  subject: "Your Invoice",
-  attachments: [{ path: pdfPath, contentType: "application/pdf" }]
-});
-🏗 Deployment (Vercel)
-A vercel.json file for serverless Node functions:
-
-json
-Copy code
+```json
 {
   "version": 2,
   "builds": [
-    { "src": "src/server.js", "use": "@vercel/node" }
+    {
+      "src": "src/server.js",
+      "use": "@vercel/node"
+    }
   ],
   "routes": [
-    { "src": "(.*)", "dest": "src/server.js" }
+    {
+      "src": "(.*)",
+      "dest": "src/server.js"
+    }
   ]
 }
-Notes for Vercel:
+```
 
-Use /tmp for temporary file creation (e.g., invoice PDF).
+---
 
-Cloudinary upload should accept local file path /tmp/{orderId}.pdf.
+## 🧪 Running the Project
 
-Ensure environment variables are set in Vercel project settings.
-
-🧪 Running the Project (local)
-bash
-Copy code
+```
 npm install
-cp .env.example .env
-# fill .env values
 npm start
-🧑‍💻 Author
-Built by Mo Salah.
+```
+
+---
+
+## 🧑‍💻 Author
+
+Built by **Mo Salah**.
 
 Feel free to open issues or contribute! ✨
