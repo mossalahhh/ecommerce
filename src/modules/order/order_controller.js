@@ -11,7 +11,7 @@ import { clearCart, updateStock } from "./order_service.js";
 import fs from "fs/promises";
 import Stripe from "stripe";
 //file url to path to make directory like path not url
-const __direname = path.dirname(fileURLToPath(import.meta.url));
+// const __direname = path.dirname(fileURLToPath(import.meta.url));
 
 export const createOrder = async (req, res, next) => {
   //data
@@ -109,7 +109,9 @@ export const createOrder = async (req, res, next) => {
   //   __direname,
   //   `../../../invoice_temp/${order._id}.pdf`
   // );
+  //to read file on versel
   const pdfPath = `/tmp/${order._id}.pdf`;
+  
   console.log("2- Invoice Path:", pdfPath);
 
   createInvoice(invoice, pdfPath);
