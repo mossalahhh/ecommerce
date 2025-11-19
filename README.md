@@ -1,21 +1,35 @@
-🛍️ E-commerce API - Full-Stack E-commerce Platform💡 OverviewThis project is the Backend API for a robust e-commerce platform built using Node.js, Express.js, and MongoDB. It features a comprehensive system for managing users, products, shopping carts, orders, and coupons, focusing on security and modularity.📁 Project StructureThe project is organized using a clear Modules architecture for maintainability:ecommerce/
-├── node_modules/
-├── src/
-│   ├── modules/
-│   │   ├── auth/         # Authentication (Sign Up, Login, Confirmation)
-│   │   ├── brand/        # Brand Management
-│   │   ├── cart/         # Shopping Cart Management
-│   │   ├── category/     # Main Categories
-│   │   ├── coupon/       # Coupon Management
-│   │   ├── order/        # Order Processing
-│   │   ├── product/      # Products
-│   │   └── subCategory/  # Sub-Categories
-│   └── utils/          # Helper/Utility Functions (CORS, Cloudinary, Multer, etc.)
-├── .env                  # Environment Variables
-├── index.js              # Server Entry Point
-├── package.json
-└── README.md
-🚀 Local Installation and Setup1. PrerequisitesNode.js: Version 22.17.0 or higher.MongoDB Atlas: For setting up the cloud database.Git2. Clone and InstallBashgit clone https://github.com/mossalhhhn/ecommerce.git
+# 🛍️ E-commerce API - Full-Stack E-commerce Platform
+
+[![Node.js](https://img.shields.io/badge/Node.js-22.17.0-green.svg)](https://nodejs.org/)
+[![Express.js](https://img-shields.io/badge/Framework-Express.js-blue.svg)](https://expressjs.com/)
+[![Database](https://img.shields.io/badge/Database-MongoDB-47A248.svg)](https://www.mongodb.com/atlas)
+[![License](https://img.shields.io/badge/License-ISC-orange)](LICENSE)
+
+---
+
+## 💡 Overview
+
+This project is the Backend API for a robust e-commerce platform built using **Node.js, Express.js, and MongoDB**. It features a comprehensive system for managing users, products, shopping carts, orders, and coupons, focusing on security and modularity.
+
+### 📁 Project Structure
+
+The project is organized using a clear **Modules** architecture for maintainability:
+
+ecommerce/├── node_modules/├── src/│   ├── modules/│   │   ├── auth/         # Authentication (Sign Up, Login, Confirmation)│   │   ├── brand/        # Brand Management│   │   ├── cart/         # Shopping Cart Management│   │   ├── category/     # Main Categories│   │   ├── coupon/       # Coupon Management│   │   ├── order/        # Order Processing│   │   ├── product/      # Products│   │   └── subCategory/  # Sub-Categories│   └── utils/          # Helper/Utility Functions (CORS, Cloudinary, Multer, etc.)├── .env                  # Environment Variables├── index.js              # Server Entry Point├── package.json└── README.md
+---
+
+## 🚀 Local Installation and Setup
+
+### 1. Prerequisites
+
+* **Node.js:** Version `22.17.0` or higher.
+* **MongoDB Atlas:** For setting up the cloud database.
+* **Git**
+
+### 2. Clone and Install
+
+```bash
+git clone [https://github.com/mossalhhhn/ecommerce.git](https://github.com/mossalhhhn/ecommerce.git)
 cd ecommerce
 npm install
 3. Environment Variables (.env)Create a file named .env in the root directory and populate it with your configuration:مقتطف الرمز# MongoDB Atlas Connection String
@@ -34,7 +48,7 @@ EMAIL_PASS=
 TOKEN_SECRET=MY_SUPER_SECURE_TOKEN_KEY
 
 # CORS Whitelist (For testing)
-WHITELIST=["undefined", "null", "http://127.0.0.1:5500"]
+WHITELIST=["undefined", "null", "[http://127.0.0.1:5500](http://127.0.0.1:5500)"]
 4. Run the ServerBashnpm start
 # Or for development with Nodemon
 npm run dev
