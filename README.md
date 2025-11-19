@@ -141,7 +141,7 @@ git clone https://github.com/mossalhhhn/ecommerce.git
 cd ecommerce
 npm install
 ```
-###3️⃣ Environment Variables (.env)
+3️⃣ Environment Variables (.env)
 | Variable                | Description                     | Example                                                             |
 | ----------------------- | ------------------------------- | ------------------------------------------------------------------- |
 | `MONGO_URI`             | MongoDB Atlas Connection String | `mongodb+srv://<USER>:<PASSWORD>@cluster0.mongodb.net/ecommerce_db` |
@@ -179,17 +179,33 @@ Base URL: http://localhost:3000
 | Cancel Order       | `/order/:invoiceId`                 | PATCH  | ✅    | None  |
 | Create Coupon      | `/coupon/`                          | POST   | ✅    | Admin |
 
-###🛡️ Security & Middleware
+🛡️ Security and Middleware
+🌐 CORS Configuration
+Mechanism: Implemented a Custom CORS Middleware to strictly control cross-origin requests.
 
-🌐 CORS Middleware: يسمح فقط للأصول المسموح بها.
+Purpose: The middleware enforces a specific Whitelist defined in the .env file, ensuring that the API only accepts requests from trusted origins (including local testing origins like http://127.0.0.1:5500).
 
-🔑 JWT Authentication: حماية المسارات باستخدام jsonwebtoken.
+🔑 JWT Authentication
+Technology: Uses the jsonwebtoken library to secure API routes.
 
-👑 Role-Based Authorization: isAuthorized("admin") للتحكم في المسارات الحساسة.
+Implementation: The isAusthenticated middleware verifies the presence and validity of the JSON Web Token (JWT) in the request headers.
 
-✅ Input Validation: Joi للتحقق من صحة البيانات الواردة.
+Function: This ensures that only authenticated users can access protected routes related to carts, orders, and user profiles.
 
-📸 File Uploads: Multer + Cloudinary لإدارة وتحميل الصور بأمان.
+👑 Role-Based Authorization
+Middleware: Utilizes the isAuthorized("admin") middleware.
+
+Control: This mechanism restricts access to sensitive and administrative endpoints (e.g., creating/updating products, categories, and coupons) to users possessing the admin role only.
+
+✅ Input Validation (Joi)
+Library: Uses Joi for defining strict data schemas.
+
+Function: The isValid middleware intercepts incoming requests and ensures that all request bodies (for registration, orders, etc.) adhere to the expected format and constraints before they are processed by the controllers.
+
+📸 File Uploads and Management
+Tools: Combines Multer for handling multipart form data and Cloudinary for secure, persistent cloud storage of files.
+
+Use Case: This system is used for managing product images, category images, and brand logos, ensuring efficient and safe file processing.
 
 🧑‍💻 Author
 
