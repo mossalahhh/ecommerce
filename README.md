@@ -153,14 +153,14 @@ npm install
 | `TOKEN_SECRET`          | JWT Secret Key                  | `MY_SUPER_SECURE_TOKEN_KEY`                                         |
 | `WHITELIST`             | CORS Whitelisted Origins        | `["undefined","null","http://127.0.0.1:5500"]`                      |
 
-###4️⃣ Run the Server
+4️⃣ Run the Server
 # Start server
 npm start
 
 # For development (auto reload with Nodemon)
 npm run dev
 
-###🔗 API Endpoints
+🔗 API Endpoints
 
 Base URL: http://localhost:3000
 | Feature            | Endpoint                            | Method | Auth | Role  |
