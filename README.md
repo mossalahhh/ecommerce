@@ -141,7 +141,7 @@ git clone https://github.com/mossalhhhn/ecommerce.git
 cd ecommerce
 npm install
 
-3️⃣ Environment Variables (.env)
+###3️⃣ Environment Variables (.env)
 | Variable                | Description                     | Example                                                             |
 | ----------------------- | ------------------------------- | ------------------------------------------------------------------- |
 | `MONGO_URI`             | MongoDB Atlas Connection String | `mongodb+srv://<USER>:<PASSWORD>@cluster0.mongodb.net/ecommerce_db` |
@@ -153,14 +153,14 @@ npm install
 | `TOKEN_SECRET`          | JWT Secret Key                  | `MY_SUPER_SECURE_TOKEN_KEY`                                         |
 | `WHITELIST`             | CORS Whitelisted Origins        | `["undefined","null","http://127.0.0.1:5500"]`                      |
 
-4️⃣ Run the Server
+###4️⃣ Run the Server
 # Start server
 npm start
 
 # For development (auto reload with Nodemon)
 npm run dev
 
-🔗 API Endpoints
+###🔗 API Endpoints
 
 Base URL: http://localhost:3000
 | Feature            | Endpoint                            | Method | Auth | Role  |
@@ -179,7 +179,7 @@ Base URL: http://localhost:3000
 | Cancel Order       | `/order/:invoiceId`                 | PATCH  | ✅    | None  |
 | Create Coupon      | `/coupon/`                          | POST   | ✅    | Admin |
 
-🛡️ Security & Middleware
+###🛡️ Security & Middleware
 
 🌐 CORS Middleware: يسمح فقط للأصول المسموح بها.
 
