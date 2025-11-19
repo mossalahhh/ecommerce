@@ -1,1 +1,106 @@
+# 🛍️ E-commerce API - Full-Stack E-commerce Platform
 
+[![Node.js](https://img.shields.io/badge/Node.js-22.17.0-green.svg)](https://nodejs.org/)
+[![Express.js](https://img.shields.io/badge/Framework-Express.js-blue.svg)](https://expressjs.com/)
+[![Database](https://img.shields.io/badge/Database-MongoDB-47A248.svg)](https://www.mongodb.com/atlas)
+[![License](https://img.shields.io/badge/License-ISC-orange)](LICENSE)
+
+---
+
+## 💡 Overview
+
+🚀 **E-commerce API** هو Backend لمشروع منصة تجارة إلكترونية قوية مبنية باستخدام **Node.js, Express.js, MongoDB**.  
+يدعم إدارة **المستخدمين، المنتجات، الفئات، العربة، الطلبات، والكوبونات** مع التركيز على **الأمان والتصميم المعياري**.
+
+---
+
+## 🗂️ Project Structure
+
+ecommerce/
+├── node_modules/
+├── src/
+│ ├── modules/
+│ │ ├── auth/ # 🔑 Authentication (Sign Up, Login, Confirmation)
+│ │ ├── brand/ # 🏷️ Brand Management
+│ │ ├── cart/ # 🛒 Shopping Cart
+│ │ ├── category/ # 📂 Main Categories
+│ │ ├── coupon/ # 🎟️ Coupon Management
+│ │ ├── order/ # 📦 Order Processing
+│ │ ├── product/ # 🛍️ Products
+│ │ └── subCategory/ # 📁 Sub-Categories
+│ └── utils/ # 🛠️ Helpers (CORS, Cloudinary, Multer, etc.)
+├── .env # 🔐 Environment Variables
+├── index.js # 🚀 Server Entry Point
+├── package.json
+└── README.md
+
+## ⚙️ Installation & Setup
+
+### 1️⃣ Prerequisites
+
+* **Node.js:** v22.17.0 or higher  
+* **MongoDB Atlas:** Cloud Database  
+* **Git**
+
+### 2️⃣ Clone & Install
+
+```bash
+git clone https://github.com/mossalhhhn/ecommerce.git
+cd ecommerce
+npm install
+
+3️⃣ Environment Variables (.env)
+| Variable                | Description                     | Example                                                             |
+| ----------------------- | ------------------------------- | ------------------------------------------------------------------- |
+| `MONGO_URI`             | MongoDB Atlas Connection String | `mongodb+srv://<USER>:<PASSWORD>@cluster0.mongodb.net/ecommerce_db` |
+| `CLOUDINARY_CLOUD_NAME` | Cloudinary Cloud Name           | `mycloud`                                                           |
+| `CLOUDINARY_API_KEY`    | Cloudinary API Key              | `1234567890`                                                        |
+| `CLOUDINARY_API_SECRET` | Cloudinary API Secret           | `mysecret`                                                          |
+| `EMAIL_USER`            | Email Service User              | `example@gmail.com`                                                 |
+| `EMAIL_PASS`            | Email Service Password          | `emailpassword`                                                     |
+| `TOKEN_SECRET`          | JWT Secret Key                  | `MY_SUPER_SECURE_TOKEN_KEY`                                         |
+| `WHITELIST`             | CORS Whitelisted Origins        | `["undefined","null","http://127.0.0.1:5500"]`                      |
+
+4️⃣ Run the Server
+# Start server
+npm start
+
+# For development (auto reload with Nodemon)
+npm run dev
+
+🔗 API Endpoints
+
+Base URL: http://localhost:3000
+| Feature            | Endpoint                            | Method | Auth | Role  |
+| ------------------ | ----------------------------------- | ------ | ---- | ----- |
+| Sign Up            | `/auth/register`                    | POST   | ❌    | None  |
+| Login              | `/auth/logIn`                       | POST   | ❌    | None  |
+| Create Category    | `/category/`                        | POST   | ✅    | Admin |
+| Get Categories     | `/category/`                        | GET    | ❌    | None  |
+| Create SubCategory | `/category/:categoryId/subcategory` | POST   | ✅    | Admin |
+| Create Product     | `/category/:categoryId/products`    | POST   | ✅    | Admin |
+| Search Product     | `/product/search`                   | GET    | ❌    | None  |
+| Add to Cart        | `/cart/`                            | POST   | ✅    | None  |
+| View Cart          | `/cart/`                            | GET    | ✅    | None  |
+| Clear Cart         | `/cart/clear`                       | PATCH  | ✅    | None  |
+| Create Order       | `/order/`                           | POST   | ✅    | None  |
+| Cancel Order       | `/order/:invoiceId`                 | PATCH  | ✅    | None  |
+| Create Coupon      | `/coupon/`                          | POST   | ✅    | Admin |
+
+🛡️ Security & Middleware
+
+🌐 CORS Middleware: يسمح فقط للأصول المسموح بها.
+
+🔑 JWT Authentication: حماية المسارات باستخدام jsonwebtoken.
+
+👑 Role-Based Authorization: isAuthorized("admin") للتحكم في المسارات الحساسة.
+
+✅ Input Validation: Joi للتحقق من صحة البيانات الواردة.
+
+📸 File Uploads: Multer + Cloudinary لإدارة وتحميل الصور بأمان.
+
+🧑‍💻 Author
+
+Built by Mohamed Salah.
+
+Feel free to open issues or contribute! ✨
