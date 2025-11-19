@@ -1,4 +1,4 @@
-# 🛍️ E-commerce API - Full-Stack E-commerce Platform
+# 🛍️ E-commerce API - Back-End E-commerce Platform
 
 [![Node.js](https://img.shields.io/badge/Node.js-22.17.0-green.svg)](https://nodejs.org/)
 [![Express.js](https://img.shields.io/badge/Framework-Express.js-blue.svg)](https://expressjs.com/)
