@@ -140,7 +140,7 @@ npm start
 git clone https://github.com/mossalhhhn/ecommerce.git
 cd ecommerce
 npm install
-
+```
 ###3️⃣ Environment Variables (.env)
 | Variable                | Description                     | Example                                                             |
 | ----------------------- | ------------------------------- | ------------------------------------------------------------------- |
