@@ -65,8 +65,6 @@ ecommerce/
 
 Checkout session gets created when payment type = **Visa**.
 
-![Stripe Checkout](path_to_stripe_image)
-
 ---
 
 ## 🧾 Invoice Example
@@ -78,8 +76,6 @@ Generated PDF is stored temporarily in:
 ```
 
 And uploaded to Cloudinary.
-
-![Invoice Example](path_to_invoice_image)
 
 ---
 
