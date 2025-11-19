@@ -137,7 +137,7 @@ git clone https://github.com/mossalhhhn/ecommerce.git
 cd ecommerce
 npm install
 ```
-3️⃣ Environment Variables (.env)
+### 3️⃣ Environment Variables (.env)
 | Variable                | Description                     | Example                                                             |
 | ----------------------- | ------------------------------- | ------------------------------------------------------------------- |
 | `MONGO_URI`             | MongoDB Atlas Connection String | `mongodb+srv://<USER>:<PASSWORD>@cluster0.mongodb.net/ecommerce_db` |
@@ -149,14 +149,14 @@ npm install
 | `TOKEN_SECRET`          | JWT Secret Key                  | `MY_SUPER_SECURE_TOKEN_KEY`                                         |
 | `WHITELIST`             | CORS Whitelisted Origins        | `["undefined","null","http://127.0.0.1:5500"]`                      |
 
-4️⃣ Run the Server
+### 4️⃣ Run the Server
 # Start server
 npm start
 
 # For development (auto reload with Nodemon)
 npm run dev
 
-🔗 API Endpoints
+### 🔗 API Endpoints
 
 Base URL: http://localhost:3000
 | Feature            | Endpoint                            | Method | Auth | Role  |
@@ -175,35 +175,35 @@ Base URL: http://localhost:3000
 | Cancel Order       | `/order/:invoiceId`                 | PATCH  | ✅    | None  |
 | Create Coupon      | `/coupon/`                          | POST   | ✅    | Admin |
 
-🛡️ Security and Middleware
-🌐 CORS Configuration
+### 🛡️ Security and Middleware
+### 🌐 CORS Configuration
 Mechanism: Implemented a Custom CORS Middleware to strictly control cross-origin requests.
 
 Purpose: The middleware enforces a specific Whitelist defined in the .env file, ensuring that the API only accepts requests from trusted origins (including local testing origins like http://127.0.0.1:5500).
 
-🔑 JWT Authentication
+### 🔑 JWT Authentication
 Technology: Uses the jsonwebtoken library to secure API routes.
 
 Implementation: The isAusthenticated middleware verifies the presence and validity of the JSON Web Token (JWT) in the request headers.
 
 Function: This ensures that only authenticated users can access protected routes related to carts, orders, and user profiles.
 
-👑 Role-Based Authorization
+### 👑 Role-Based Authorization
 Middleware: Utilizes the isAuthorized("admin") middleware.
 
 Control: This mechanism restricts access to sensitive and administrative endpoints (e.g., creating/updating products, categories, and coupons) to users possessing the admin role only.
 
-✅ Input Validation (Joi)
+### ✅ Input Validation (Joi)
 Library: Uses Joi for defining strict data schemas.
 
 Function: The isValid middleware intercepts incoming requests and ensures that all request bodies (for registration, orders, etc.) adhere to the expected format and constraints before they are processed by the controllers.
 
-📸 File Uploads and Management
+### 📸 File Uploads and Management
 Tools: Combines Multer for handling multipart form data and Cloudinary for secure, persistent cloud storage of files.
 
 Use Case: This system is used for managing product images, category images, and brand logos, ensuring efficient and safe file processing.
 
-🧑‍💻 Author
+### 🧑‍💻 Author
 
 Built by Mohamed Salah.
 
