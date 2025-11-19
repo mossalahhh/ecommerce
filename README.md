@@ -41,6 +41,25 @@ A production-ready Node.js backend for an e-commerce platform built using **Expr
 
 ---
 
+## 🗂️ Project Structure
+
+ecommerce/
+├── node_modules/
+├── src/
+│ ├── modules/
+│ │ ├── auth/ # 🔑 Authentication (Sign Up, Login, Confirmation)
+│ │ ├── brand/ # 🏷️ Brand Management
+│ │ ├── cart/ # 🛒 Shopping Cart
+│ │ ├── category/ # 📂 Main Categories
+│ │ ├── coupon/ # 🎟️ Coupon Management
+│ │ ├── order/ # 📦 Order Processing
+│ │ ├── product/ # 🛍️ Products
+│ │ └── subCategory/ # 📁 Sub-Categories
+│ └── utils/ # 🛠️ Helpers (CORS, Cloudinary, Multer, etc.)
+├── .env # 🔐 Environment Variables
+├── index.js # 🚀 Server Entry Point
+├── package.json
+└── README.md
 
 ## 💳 Stripe Payment Example
 
@@ -106,26 +125,6 @@ npm start
 ```
 
 ---
-
-## 🗂️ Project Structure
-
-ecommerce/
-├── node_modules/
-├── src/
-│ ├── modules/
-│ │ ├── auth/ # 🔑 Authentication (Sign Up, Login, Confirmation)
-│ │ ├── brand/ # 🏷️ Brand Management
-│ │ ├── cart/ # 🛒 Shopping Cart
-│ │ ├── category/ # 📂 Main Categories
-│ │ ├── coupon/ # 🎟️ Coupon Management
-│ │ ├── order/ # 📦 Order Processing
-│ │ ├── product/ # 🛍️ Products
-│ │ └── subCategory/ # 📁 Sub-Categories
-│ └── utils/ # 🛠️ Helpers (CORS, Cloudinary, Multer, etc.)
-├── .env # 🔐 Environment Variables
-├── index.js # 🚀 Server Entry Point
-├── package.json
-└── README.md
 
 ## ⚙️ Installation & Setup
 
