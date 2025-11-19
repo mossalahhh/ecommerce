@@ -81,6 +81,14 @@ export const createOrder = async (req, res, next) => {
     },
     price: orderPrice,
   });
+  console.log("== START create order ==");
+
+  console.log("1- Order created:", order._id);
+
+  console.log("2- Invoice Path:", pdfPath);
+  console.log("Directory exists?", __direname);
+
+  console.log("3- Before createInvoice");
 
   //generate invoice
   const invoice = {
@@ -96,12 +104,16 @@ export const createOrder = async (req, res, next) => {
     invoice_nr: order._id,
   };
 
-  const pdfPath = path.join(
-    __direname,
-    `../../../invoice_temp/${order._id}.pdf`
-  );
+  console.log("4- Invoice created");
+
+  // const pdfPath = path.join(
+  //   __direname,
+  //   `../../../invoice_temp/${order._id}.pdf`
+  // );
+  const pdfPath = `/tmp/${order._id}.pdf`;
 
   createInvoice(invoice, pdfPath);
+  console.log("5- Before Cloudinary upload");
 
   //upload on cloudinary
   const { secure_url, public_id } = await cloudinary.uploader.upload(pdfPath, {
@@ -110,6 +122,9 @@ export const createOrder = async (req, res, next) => {
 
   order.invoice = { id: public_id, url: secure_url };
   await order.save();
+  console.log("6- Cloudinary uploaded");
+
+  console.log("7- Before sendEmail");
 
   const isSent = await sendEmail({
     to: user.email,
@@ -128,9 +143,13 @@ export const createOrder = async (req, res, next) => {
     //clearCart
     clearCart(user._id);
   }
+  console.log("8- Email sent");
 
   //remove temporary pdf from file system
   await fs.unlink(pdfPath);
+
+  console.log("9- Before stripe session");
+
   //stripe payment
   if (payment === "Visa") {
     const stripe = new Stripe(process.env.STRIPE_KEY);
