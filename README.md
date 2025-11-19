@@ -7,10 +7,103 @@
 
 ---
 
-## 💡 Overview
+# E-Commerce Backend API
 
-🚀 **E-commerce API** هو Backend لمشروع منصة تجارة إلكترونية قوية مبنية باستخدام **Node.js, Express.js, MongoDB**.  
-يدعم إدارة **المستخدمين، المنتجات، الفئات، العربة، الطلبات، والكوبونات** مع التركيز على **الأمان والتصميم المعياري**.
+A production-ready Node.js backend for an e-commerce platform built using **Express**, **MongoDB (Mongoose)**, **Stripe**, **Cloudinary**, and **JWT Authentication**. The system supports full order processing, cart management, payments, invoices, and email notifications.
+
+---
+
+## 🚀 Features
+
+* **User Authentication (JWT)** – Register, login, and protected routes
+* **Product Management** – CRUD operations for products
+* **Cart System** – Add, update, and remove items
+* **Coupon Support** – Discount handling & validation
+* **Order System** – Place orders, cancel orders, and update stock automatically
+* **Payment Integration** – Stripe Checkout for VISA payments
+* **Invoice Generation** – Auto PDF invoice using `pdfkit`
+* **Cloudinary Uploads** – Upload generated invoice PDFs
+* **Email Notifications** – Sends invoice via email
+* **Secure Deployment** – Vercel serverless functions with `/tmp` file handling
+
+---
+
+## 🧩 Technologies Used
+
+* **Node.js / Express**
+* **MongoDB + Mongoose**
+* **Stripe Payments**
+* **Cloudinary Uploader**
+* **Nodemailer**
+* **PDFKit**
+* **JWT Authentication**
+* **Vercel Serverless Deployment**
+
+---
+
+
+## 💳 Stripe Payment Example
+
+Checkout session gets created when payment type = **Visa**.
+
+![Stripe Checkout](path_to_stripe_image)
+
+---
+
+## 🧾 Invoice Example
+
+Generated PDF is stored temporarily in:
+
+```
+/tmp/orderId.pdf
+```
+
+And uploaded to Cloudinary.
+
+![Invoice Example](path_to_invoice_image)
+
+---
+
+## 📬 Email Notification
+
+The system sends the invoice PDF to the user's email:
+
+```
+sendEmail({ to, subject, attachments: [...] })
+```
+
+---
+
+## 🏗 Deployment (Vercel)
+
+A `vercel.json` file is required:
+
+```json
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "src/server.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "(.*)",
+      "dest": "src/server.js"
+    }
+  ]
+}
+```
+
+---
+
+## 🧪 Running the Project
+
+```
+npm install
+npm start
+```
 
 ---
 
