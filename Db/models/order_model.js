@@ -39,7 +39,15 @@ export const orderSchema = new Schema({
   },
   status: {
     type: String,
-    enum: ["placed", "shipped", "delivered", "canceled", "refunded"],
+    enum: [
+      "placed",
+      "shipped",
+      "delivered",
+      "canceled",
+      "refunded",
+      "payed successfully",
+      "faild to pay",
+    ],
     default: "placed",
   },
   payment: {

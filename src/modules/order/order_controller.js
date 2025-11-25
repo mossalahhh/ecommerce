@@ -111,7 +111,7 @@ export const createOrder = async (req, res, next) => {
   // );
   //to read file on versel
   const pdfPath = `/tmp/${order._id}.pdf`;
-  
+
   console.log("2- Invoice Path:", pdfPath);
 
   createInvoice(invoice, pdfPath);
@@ -167,6 +167,7 @@ export const createOrder = async (req, res, next) => {
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
       mode: "payment",
+      metadata: { order_id: order._id.toString() },
       success_url: process.env.SUCCESS_URL,
       cancel_url: process.env.CANCEL_URL,
       line_items: order.products.map((product) => {
@@ -220,4 +221,36 @@ export const cancelOrder = async (req, res, next) => {
     success: true,
     message: "Order canceled successfully",
   });
+};
+
+export const orderWebhook = async (req, res, next) => {
+  let event;
+  const endpointSecret = process.env.STRIPE_SECRET;
+  if (endpointSecret) {
+    // Get the signature sent by Stripe
+    const signature = req.headers["stripe-signature"];
+    const stripe = new Stripe(process.env.STRIPE_KEY);
+    try {
+      event = stripe.webhooks.constructEvent(
+        req.body,
+        signature,
+        endpointSecret
+      );
+    } catch (err) {
+      console.log(`⚠️ Webhook signature verification failed.`, err.message);
+      return res.sendStatus(400);
+    }
+
+    // Handle the event
+    const orderId = event.data.object.metadata.order_id;
+    if (event.type === "checkout.session.completed") {
+      await Order.findOneAndUpdate(
+        { _id: orderId },
+        { status: "payed successfully" }
+      );
+      return res.sendStatus(200);
+    }
+    await Order.findOneAndUpdate({ _id: orderId }, { status: "faild to pay" });
+    return res.sendStatus(200);
+  }
 };

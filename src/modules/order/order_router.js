@@ -20,4 +20,9 @@ router.patch(
   catchError(cancelOrder)
 );
 
+router.post(
+  "/webhook",
+  express.raw({ type: "application/json" }),
+  catchError(orderWebhook)
+);
 export default router;
