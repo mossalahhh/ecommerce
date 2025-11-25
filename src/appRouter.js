@@ -13,7 +13,7 @@ export const appRouter = (app, express) => {
   }
 
   //undefined for postman requests
-  //null for fs 
+  //null for fs
   const whiteList = [undefined, "null", "http://127.0.0.1:5500"];
   app.use((req, res, next) => {
     //handle confirm Email api
@@ -35,7 +35,12 @@ export const appRouter = (app, express) => {
     return next();
   });
 
-  app.use(express.json());
+  app.use((req, res, next) => {
+    if (req.originalUrl === "/order/webhook") {
+      return next();
+    }
+    express.json()(req, res, next);
+  });
   app.use("/auth", authRouter);
   app.use("/category", categoryRouter);
   app.use("/brand", brandRouter);
