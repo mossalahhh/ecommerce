@@ -147,7 +147,7 @@ npm install
 | `EMAIL_USER`            | Email Service User              | `example@gmail.com`                                                 |
 | `EMAIL_PASS`            | Email Service Password          | `emailpassword`                                                     |
 | `TOKEN_SECRET`          | JWT Secret Key                  | `MY_SUPER_SECURE_TOKEN_KEY`                                         |
-| `WHITELIST`             | CORS Whitelisted Origins        | `["undefined","null","http://127.0.0.1:5500"]`                      |
+| `WHITELIST`             | CORS Whitelisted Origins        | `["http://127.0.0.1:5500"]`                      |
 
 ### 4️⃣ Run the Server
 # Start server
